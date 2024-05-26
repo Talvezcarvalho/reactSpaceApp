@@ -3,48 +3,39 @@ import Titulo from "../Titulo";
 import Tags from "./Tags";
 import Populares from "./Populares";
 import Imagem from "./Imagem";
-import { useState } from "react";
 
 const GaleriaContainer = styled.div`
   display: flex;
-`;
+  gap: 24px;
+`
 const SecaoFluida = styled.section`
   flex-grow: 1;
 `;
 
-const ListaImagensGaleria = styled.ul`
+const ImagensGaleria = styled.section`
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
   padding: 0;
   margin: 0;
-  list-style: none;
-  li {
-    flex-grow: 1;
-    width: ${({ expandido }) => (expandido ? "90%" : "460px")};
-  }
 `;
 
-const Galeria = ({ fotos = [] }) => {
-  const [expandido, setExpandido] = useState(false);
+const Galeria = ({ fotos = [], aoFotoSelecionada }) => {
   return (
     <>
       <Tags />
       <GaleriaContainer>
         <SecaoFluida>
           <Titulo>Navegue pela galeria</Titulo>
-          <ListaImagensGaleria expandido={expandido}>
-            {fotos.map((foto) => (
-              <li>
+          <ImagensGaleria>
+            {fotos.map((foto) => 
                 <Imagem
+                  aoZoomSolicitado = {aoFotoSelecionada}
+                  key={foto.id}
                   foto={foto}
-                  expandir={() => {
-                    setExpandido(!expandido); 
-                  }}
                 />
-              </li>
-            ))}
-          </ListaImagensGaleria>
+            )}
+          </ImagensGaleria>
         </SecaoFluida>
         <Populares />
       </GaleriaContainer>

@@ -7,6 +7,7 @@ import Bannerimg from "./assets/banner.png";
 import Galeria from "./componentes/Galeria";
 import fotos from "./fotos.json";
 import { useState } from "react";
+import ModalZoom from "./componentes/ModalZoom";
 
 const AppContainer = styled.div`
   width: 1440px;
@@ -19,10 +20,10 @@ const MainContainer = styled.main`
 `;
 
 const ConteudoGaleria = styled.section`
-display: flex;
-flex-direction: column;
-flex-grow: 1;
-`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`;
 
 const FundoGradiente = styled.div`
   background: linear-gradient(
@@ -36,6 +37,7 @@ const FundoGradiente = styled.div`
 `;
 const App = () => {
   const [fotosDaGaleria, setfotosDaGaleria] = useState(fotos);
+  const [fotoSelecionada, setFotoSelecionada] = useState(null);
   return (
     <FundoGradiente>
       <EstilosGlobais />
@@ -43,16 +45,23 @@ const App = () => {
         <Cabecalho />
         <MainContainer>
           <BarraLateral />
-          <ConteudoGaleria> 
-          <Banner backgroundImage={Bannerimg}>
-            A galeria mais completa de fotos do espaço!
-          </Banner>
-          <Galeria fotos={fotosDaGaleria}/>
+          <ConteudoGaleria>
+            <Banner backgroundImage={Bannerimg}>
+              A galeria mais completa de fotos do espaço!
+            </Banner>
+            <Galeria
+              fotos={fotosDaGaleria}
+              aoFotoSelecionada={foto => setFotoSelecionada(foto)}
+            />
           </ConteudoGaleria>
         </MainContainer>
       </AppContainer>
+      <ModalZoom 
+      foto={fotoSelecionada}
+      aoFechar={() => setFotoSelecionada(null)}
+       />
     </FundoGradiente>
   );
-}
+};
 
 export default App;

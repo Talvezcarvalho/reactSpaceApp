@@ -44,8 +44,10 @@ const Rodape = styled.footer`
   align-self: flex-end;
 `;
  
-const Imagem = ({ foto, aoZoomSolicitado, expandido }) => {
+const Imagem = ({ foto, aoZoomSolicitado, aoFavoritar, expandido }) => {
     //const [expandido, setExpandido] = useState(false);
+
+    const iconeFavorito = foto.favorita ? "/icones/favorito-ativo.png" : "/icones/favorito.png";
 
   return (
     <Figure $expandido= {expandido} >
@@ -56,7 +58,7 @@ const Imagem = ({ foto, aoZoomSolicitado, expandido }) => {
           <h4>{foto.fonte}</h4>
         </SubTitulos>
         <Rodape>
-          <BotaoIcone><img src="/icones/favorito.png" alt="icone"/></BotaoIcone>
+          <BotaoIcone onClick={ () => aoFavoritar(foto)}><img src={iconeFavorito} alt="icone"/></BotaoIcone>
           {!expandido ? (<BotaoIcone onClick={() => aoZoomSolicitado(foto)}><img src="/icones/expandir.png" alt="icone"/></BotaoIcone>) : null}
         </Rodape>
       </FigCaptionEstilizado>

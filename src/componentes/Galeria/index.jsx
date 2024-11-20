@@ -20,7 +20,7 @@ const ImagensGaleria = styled.section`
   margin: 0;
 `;
 
-const Galeria = ({ fotos = [], aoFotoSelecionada }) => {
+const Galeria = ({ fotos = [], aoFotoSelecionada, aoAlternarFavorito }) => {
   return (
     <>
       <Tags />
@@ -30,6 +30,7 @@ const Galeria = ({ fotos = [], aoFotoSelecionada }) => {
           <ImagensGaleria>
             {fotos.map((foto) => 
                 <Imagem
+                  aoFavoritar = {aoAlternarFavorito}
                   aoZoomSolicitado = {aoFotoSelecionada}
                   key={foto.id}
                   foto={foto}

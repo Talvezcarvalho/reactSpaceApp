@@ -18,32 +18,36 @@ const DialogEstilizado = styled.dialog`
   display: flex;
   border: none;
   justify-content: center;
-`
+`;
 
 const BotaoIcone = styled.button`
-    position: relative;
-    top: -322px;
-    right: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-`
+  position: relative;
+  top: -322px;
+  right: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
 
-const ModalZoom = ({ foto, aoFechar }) => {
+const ModalZoom = ({ foto, aoFechar, aoAlternarFavorito }) => {
   return (
     <>
       {foto && (
         <>
           <OverLay />
           <DialogEstilizado open={!!foto}>
-            <Imagem foto={foto} expandido={true} />
+            <Imagem
+              foto={foto}
+              expandido={true}
+              aoFavoritar={aoAlternarFavorito}
+            />
             {/* <form method="dialog"> */}
-              <BotaoIcone /*formMethod="dialog"*/ onClick={aoFechar}>
-                <img src="/icones/fechar.png" alt="icone de fechar" />
-              </BotaoIcone>
+            <BotaoIcone /*formMethod="dialog"*/ onClick={aoFechar}>
+              <img src="/icones/fechar.png" alt="icone de fechar" />
+            </BotaoIcone>
             {/* </form> */}
           </DialogEstilizado>
         </>

@@ -38,6 +38,23 @@ const FundoGradiente = styled.div`
 const App = () => {
   const [fotosDaGaleria, setfotosDaGaleria] = useState(fotos);
   const [fotoSelecionada, setFotoSelecionada] = useState(null);
+
+  const aoAlternarFavorito = (foto) => {
+    if(foto.id === fotoSelecionada?.id) {
+      setFotoSelecionada({
+        ...fotoSelecionada,
+        favorita: !fotoSelecionada.favorita
+      })
+    }
+
+
+    setfotosDaGaleria(fotosDaGaleria.map(fotoDaGaleria => {
+      return {
+        ...fotoDaGaleria,
+        favorita: fotoDaGaleria.id === foto.id ? !foto.favorita : fotoDaGaleria.favorita
+      }
+    }))
+  }
   return (
     <FundoGradiente>
       <EstilosGlobais />
@@ -51,6 +68,7 @@ const App = () => {
             </Banner>
             <Galeria
               fotos={fotosDaGaleria}
+              aoAlternarFavorito= {fav =>aoAlternarFavorito(fav)}
               aoFotoSelecionada={foto => setFotoSelecionada(foto)}
             />
           </ConteudoGaleria>
@@ -59,6 +77,7 @@ const App = () => {
       <ModalZoom 
       foto={fotoSelecionada}
       aoFechar={() => setFotoSelecionada(null)}
+      aoAlternarFavorito={fav =>aoAlternarFavorito(fav)}
        />
     </FundoGradiente>
   );
